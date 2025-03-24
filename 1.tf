@@ -3,20 +3,20 @@ provider "aws" {
 }
 
 variable "instance_name" {
-  description = "Name of the EC2 instance"
+  description = "EC2 Instance Name"
   type        = string
-  default     = ""
+  default     = ""  # Will be overridden by Spacelift
 }
 
 variable "instance_type" {
-  description = "Type of EC2 instance"
+  description = "EC2 Instance Type"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"  # Default, but should be overridden by Spacelift
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0f9de6e2d2f067fca"  # ✅ Updated AMI ID
-  instance_type = var.instance_type
+  ami           = "ami-0f9de6e2d2f067fca"  # ✅ Use your provided AMI ID
+  instance_type = var.instance_type  # ✅ Terraform variable linked to Spacelift env variable
 
   tags = {
     Name = var.instance_name
