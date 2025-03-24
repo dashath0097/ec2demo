@@ -13,10 +13,10 @@ variable "instance_type" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0f9de6e2d2f067fca"
-  instance_type = var.instance_type  # ✅ Takes input from Spacelift only
+  ami           = "ami-0f9de6e2d2f067fca"  # ✅ Use the correct AMI ID
+  instance_type = var.instance_type        # ✅ Dynamically set from Spacelift
 
   tags = {
-    Name = var.instance_name
+    Name = var.instance_name  # ✅ Uses the instance name from Spacelift
   }
 }
